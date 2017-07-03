@@ -48,6 +48,7 @@ class LoginPage extends Component {
   }
 
   doLogin(name) {
+    console.log(name);
     this.props.doLogin(name);
   }
   renderInput({
@@ -80,11 +81,12 @@ class LoginPage extends Component {
 
   render() {
     
-
+    const { handleSubmit } = Actions.Home
     return (
       <Container style={Style.viewStyle}>
         <Content>
             <View>
+              <Form onSubmit={handleSubmit}>
                 <Image 
                     style={Style.image}
                     source={(require('../../../img/tree-with-thin-branches-covered-by-leaves.png'))}
@@ -94,10 +96,11 @@ class LoginPage extends Component {
               <Field name="password" component={this.renderInput} />
               <Button
                 style={Style.btn}
-                onPress={() => Actions.Home()}
+                type="submit"
               >
                 <Text>Entrar</Text>
               </Button>
+              </Form>
             </View>
         </Content>
         <Footer>
@@ -116,17 +119,9 @@ class LoginPage extends Component {
 }
 const LoginSwag = reduxForm(
   {
-    form: "test",
+    form: "LoginPage",
     validate
   },
-  function bindActions(dispatch) {
-    return {
-      doLogin: name => dispatch(doLogin(name))
-    };
-  }
 )(LoginPage);
-LoginSwag.navigationOptions = {
-  header: null
-};
 
 export default connect(({routes}) => ({routes}))(LoginSwag);

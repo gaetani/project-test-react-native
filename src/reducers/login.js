@@ -10,7 +10,7 @@ const initialState = {
 };
 
 export default function (state:State = initialState, action:Action): State {
-  if (action.type === SET_USER) {
+  if (action.type === DO_LOGIN) {
     return {
       ...state,
       name: action.payload,
